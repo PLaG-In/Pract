@@ -1,0 +1,130 @@
+P  ;
+USES  Crt;
+Var
+  x,          y, count,       m , n: {       }Integer;
+  input:       Text;
+  line2: String;
+  HowMany:          Integer;
+
+procedure TextFileInput;     //процедура заполнения файла грядками
+VAR
+  Ch: Char;
+  st:   String;
+  i, j,    k: Integer;
+BEGIN
+  REWRITE(input);
+  a := '// gnom {   }';
+  FOR i := 1 to n
+  DO
+    write(input,        '.');
+  FOR i := 1 to m
+  DO
+    BEGIN
+      st := '';
+      writeln(input,'');
+      FOR j := 1        to n
+      do
+        BEGIN
+          st := st + '.';
+          k := random(4);
+          IF k = 0
+          THEN
+            CH := '#'
+          ELSE
+            Ch := '.';
+          WRITE(input, Ch);
+        END;
+    END;
+    WRITELN(input, '');
+    WRITE(input, st);
+    CLOSE(input);
+END;
+
+procedure FileP;                    //процедура создания файлов , проверки, ввода и ввода размерности
+VAR
+  IFile: String;
+Begin
+  WRITE('Входной  файл: ');
+  readln(IFIle);
+  WRITE('Ширина: ');
+  READLN(m);
+  WRITE('Длина: ');
+  READLN(n);
+  Assign(input, IFile);
+  REWRITE(input);
+  TextFileInput;
+END;
+
+Procedure Proverka2(j: byte; str: String);       //процедуры проверок клеток
+BEGIN
+  IF line2[j] = '#'
+  THEN
+    inc(HowMany);
+END;
+
+Procedure Proverka(j: byte; str: String);   //подсчет заборов
+VAR
+  L: Byte;
+  Str2, Num: String;
+  Flag: Boolean;
+BEGIN
+  Flag := False;
+  IF j  = 1
+  THEN
+    BEGIN
+      inc(HowMany);
+      Flag := True;
+    END;
+  IF not Flag
+  THEN
+    IF str[j - 1] <> '#'
+      THEN
+        inc(HowMany);
+  Flag := False;
+  IF j = n
+  THEN
+    BEGIN
+      inc(HowMany);
+      Flag := True;
+    END;
+  IF not Flag
+  THEN
+    IF str[j + 1] <> '#'
+    THEN
+      inc(HowMany)
+    ELSE
+      inc(j);
+  IF line2[j] = '.'
+  THEN
+    inc(HowMany);
+END;
+
+Procedure Garden;      //процедура чтения строк и определения грядок
+VAR
+  Count: String;
+  i: Byte;
+  Flag: Boolean;
+BEGIN
+  RESET(input);
+  READLN(input, Count);
+  WHILE not EoF(input)
+  DO
+    BEGIN
+      line2 := Count;
+      READLN(input, Count);
+      FOR i := 1 to n
+      DO
+      IF Count[i] = '#'
+          THEN
+            Proverka(i, Count)
+          ELSE
+            Proverka2(i, Count);
+    END;
+    CLOSE(input);
+END;
+
+BEGIN
+  FileP;  //Создаем файл и генерируем карту деревьев
+  Garden; //Ведем подсчет заборов
+  WRITELN('Количесвто заборов :', HowMany);  //выводим результат
+END.

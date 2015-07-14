@@ -1,0 +1,5 @@
+﻿  Obfuscator.cpp
+c:\pract\obfuscator\obfuscator\obfuscator.cpp(40): warning C4018: <: несоответствие типов со знаком и без знака
+c:\pract\obfuscator\obfuscator\obfuscator.cpp(316): warning C4018: <: несоответствие типов со знаком и без знака
+c:\pract\obfuscator\obfuscator\obfuscator.cpp(391): warning C4018: <: несоответствие типов со знаком и без знака
+  Obfuscator.vcxproj -> C:\Pract\Obfuscator\Debug\Obfuscator.exe
